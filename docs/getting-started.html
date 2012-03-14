@@ -1,0 +1,212 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+
+<!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<title>Getting Started - Roo - HTML5 &lt;canvas&gt; Graphics Library</title>
+<meta name="description" content="">
+
+<!-- Mobile viewport optimized: h5bp.com/viewport -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/web.css" media="screen, projection">
+
+<link type="text/css" rel="stylesheet" href="../css/sh/shCoreDefault.css"/>
+
+<!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+<!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+<script src="../js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body id="body" class="docs">
+<header>
+	<div id="title">
+		<h1><img src="../img/roo.png" alt="Roo" /> - HTML5 &lt;canvas&gt; Graphics Library</h1>
+	</div>
+</header>
+<div id="page">
+	<div id="inner">
+		<div role="navigation" id="nav">
+			<div class="wrapper">
+				<hr/>
+				<div id="resources" >
+					<ul class="links">
+						<li><a href="getting-started.html">Getting Started</a></li>
+					</ul>
+					
+					<!-- {menu} -->
+				</div>
+			</div>
+		</div>
+		<div role="main" id="main">
+			<!-- ul class="jumpto">
+				<li><a href="#">Download</a></li>
+				<li><a href="#">FAQs</a></li>
+				<li><a href="#">SO</a></li>
+			</ul>
+			<div class="clear"></div -->
+			
+			<h2>Getting Started</h2>
+<p>Please note that <strong>Roo</strong> is still in beta release and may contain many bugs and incomplete functions. However this simple tutorial would support you getting started on developing your amazing HTML5 canvas application with Roo.</p>
+<p>Keep in touch, there's more to come!</p>
+<h3>Download &amp; Install</h3>
+<p>Roo can be installed in two easy steps. Download and copy it into your <em>scripts</em> folder. In this case we call it <em>js</em>. Then add the following code into your HTML page.</p>
+<pre class="brush: js; html-script: true; highlight: [2]">
+	
+&lt;script type="text/javascript" src="js/roo.js" &gt;&lt;/script&gt;
+	
+</pre>
+
+<h3>Build your Stage</h3>
+<p><strong>Stage</strong> provides the background environment for your graphics application. All the layers of an application should be added to the stage to make them parts of the scene rendered ultimately.</p>
+<pre class="brush: js; highlight: [2]">
+window.onload = function() {
+	var stage = new Roo.Stage('container', 600, 400);
+}
+</pre>
+<p>Where <strong>container</strong> is the container element for the stage to be added into. Basically this could be a <em>&lt;div&gt;</em> element.</p>
+
+
+<h3>Shapes</h3>
+<p>	You may create a shape object of an existing primitive shape or define your own shape with basic drawing instructions. Creating primitive shape is a one step process.
+	Lets start by creating a <strong>Rectangle</strong> shape.
+</p>
+<pre class="brush: js; highlight: [3]">
+window.onload = function() {
+	var stage = new Roo.Stage('container', 600, 400);
+	var rect = new Roo.Rectangle(100, 50, 80, 90);
+}
+</pre>
+<p>A new <strong>Rectangle</strong> object - <em>rect</em> - is created with the configurations <strong>left</strong> = 100, <strong>top</strong> = 50, <strong>width</strong> = 80 and <strong>height</strong> = 90. </p>
+<p><a href="shapes.html">Shapes</a> section contains more about primitive and custom shapes.</p>
+<h3>A layered architecture</h3>
+<p>Objects are added to layers which are subsequently added to the <strong>Stage</strong> for rendering. See how we can create a layer and add objects to that layer.</p>
+<pre class="brush: js; highlight: [4,5,6]">
+window.onload = function() {
+	var stage = new Roo.Stage('container', 600, 400);
+	var rect = new Roo.Rectangle(100, 50, 80, 90);
+	var layer = new Roo.Layer();
+	layer.add(rect);
+	stage.add(layer);
+	stage.update();
+}
+</pre>
+<p>Note that the layer is added to the stage making it available for rendering and managing events on shape objects of that particular layer. Update the stage to render its content and make them visible.</p>
+<h3>Events</h3>
+<p>You may attach several events to the objects in your scene. To get you started on event handling, lets add a <em>click</em> event to the rectangle we created.</p>
+<pre class="brush: js; highlight: [7,8,9,10]">
+window.onload = function() {
+	var stage = new Roo.Stage('container', 600, 400);
+	var rect = new Roo.Rectangle(100, 50, 80, 90);
+	var layer = new Roo.Layer();
+	layer.add(rect);
+	stage.add(layer);
+	rect.onclick = function(evt) {
+		alert("You clicked on the rectangle!");
+	};
+	rect.draggable = true;
+	stage.update();
+}
+</pre>
+<p>You may make the objects draggable by setting its <em>draggable</em> property to <em>true</em>.</p>
+
+<h3>Putting it all together</h3>
+<pre class="brush: js; html-script: true;">
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Roo - Sample Application&lt;/title&gt;
+		&lt;script type="text/javascript" src="js/roo.js" &gt;&lt;/script&gt;
+		&lt;script type="text/javascript"&gt;
+			window.onload = function() {
+				var stage = new Roo.Stage('container', 600, 400);
+				var rect = new Roo.Rectangle(100, 50, 80, 90);
+				var layer = new Roo.Layer();
+				layer.add(rect);
+				stage.add(layer);
+				rect.onclick = function(evt) {
+					alert("You clicked on the rectangle!");
+				};
+				rect.draggable = true;
+				stage.update();
+			}
+		&lt;/script&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div id="container"&gt;&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+			
+		</div>
+	</div>
+</div>
+<footer>
+    
+</footer>
+
+<!-- Up Link -->
+<div class="up"><a href="#body"><span>Up</span></a></div>
+
+<!-- Loding indicator for AJAX loading -->
+<div id="loader" ><img src="../img/loading.gif" alt="Loading..." /></div>
+
+<!-- Loding indicator for AJAX loading -->
+<div id="info" class="info">
+    <h3 class="title"></h3>
+    <p class="message"></p>
+</div>
+
+<!-- JavaScript at the bottom for fast page loading -->
+
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline >
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script -->
+<script>window.jQuery || document.write('<script src="../js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+<!-- Syntax Highlighter -->
+<script type="text/javascript" src="../js/sh/shCore.js"></script>
+<script type="text/javascript" src="../js/sh/shBrushJScript.js"></script>
+<script type="text/javascript" src="../js/sh/shBrushXml.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- scripts concatenated and minified via build script -->
+<script defer src="../js/plugins.js"></script>
+<script defer src="../js/script.js"></script>
+<!-- end scripts -->
+
+
+<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet >
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+<!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</body>
+</html>

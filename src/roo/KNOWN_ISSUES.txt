@@ -1,0 +1,4 @@
+1.	Google Chrome does not render shadows correctly on shapes with a stroke.
+	
+	http://code.google.com/p/chromium/issues/detail?id=104054
+	
